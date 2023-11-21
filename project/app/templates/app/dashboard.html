@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Административная панель</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: left;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #00796b;
+        }
+
+        p, li {
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li:before {
+            content: "• ";
+            color: #00796b;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Административная панель</h1>
+
+    <h2>Информация о доставке воды:</h2>
+
+    <h3>Количество бутылей на складе:</h3>
+    <p>{{ bottles.quantity }}</p>
+
+    <h3>Текущие заказы:</h3>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.name }} - {{ order.date }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>История выполненных заказов:</h3>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.name }} - {{ order.date }} (Выполнено)</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Занятые и свободные сотрудники:</h3>
+    <ul>
+        <li>Занято: {{ employees.busy.count }}</li>
+        <li>Свободно: {{ employees.free.count }}</li>
+    </ul>
+
+    <h3>Клиенты:</h3>
+    <ul>
+        {% for customer in customers %}
+            <li>{{ customer.name }} - {{ customer.email }}</li>
+        {% endfor %}
+    </ul>
+
+<h3>Выручка:</h3>
+<p>За день: {{ revenues_day }}</p>
+<p>За неделю: {{ revenues_week }}</p>
+<p>За месяц: {{ revenues_month }}</p>
+</body>
+</html>
